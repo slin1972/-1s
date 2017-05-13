@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8089
 spring:
   application:
     name: app-server    # 项目名称尽量用小写

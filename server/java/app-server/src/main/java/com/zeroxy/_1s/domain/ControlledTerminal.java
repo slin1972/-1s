@@ -1,5 +1,7 @@
 package com.zeroxy._1s.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
@@ -10,6 +12,7 @@ public class ControlledTerminal implements Serializable{
   private static final long serialVersionUID = -1979129014781686560L;
 
   @Id
+  @JsonProperty("device_no")
   private String deviceNo;
   private String ip ;
   private String cpu ;

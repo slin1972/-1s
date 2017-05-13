@@ -8,7 +8,7 @@
 > [api/v1/heart](#)
 
 - **请求方式** 
->**GET**
+>**POST**
 
 - **请求参数**
 
@@ -24,7 +24,7 @@
 - **请求示例**
 >    
 ```shell 
-curl 'http(s)://<host>/api/v1/heart?device_no=123&ip=192.168.0.1&cpu=123456&ram=123456&os=windowxp&name=administor'
+curl 'http(s)://<host>/api/v1/heart' -d '{ "device_no" : "123456", "ip": "192.168.0.1",  "cpu": "123456", "ram": "123456", "os": "windowxp", "name": "administor"}' -H 'Content-Type:application/json'
 ```
 
 - **返回参数**
