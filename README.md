@@ -1,7 +1,7 @@
 ## 接口文档 
->[1. 客户端接口文档](https://www.evernote.com/shard/s671/sh/b0a221cd-a137-496d-a71f-d8ac855d1814/2c8cdf7684c6b44269d8eeb74d433a2d) 
+>[1. 客户端接口](https://github.com/slin1972/-1s/blob/master/doc/客户端API.md) 
 
->[2. 服务器接口文档](https://www.evernote.com/shard/s671/sh/b0a221cd-a137-496d-a71f-d8ac855d1814/2c8cdf7684c6b44269d8eeb74d433a2d) 
+>[2. 服务器接口](https://github.com/slin1972/-1s/blob/master/doc/服务器API.md) 
 
->[3. 数据库设计文档](https://www.evernote.com/shard/s671/sh/b0a221cd-a137-496d-a71f-d8ac855d1814/2c8cdf7684c6b44269d8eeb74d433a2d) 
+>[3. 数据库设计](https://github.com/slin1972/-1s/blob/master/doc/数据库设计.md) 
 
