@@ -20,6 +20,7 @@ public class ControlledTerminal implements Serializable{
   private String os ;
   private String name ;
   private Integer lastHeartTime ;
+  private String av;
 
   public static long getSerialVersionUID() {
     return serialVersionUID;
@@ -79,6 +80,14 @@ public class ControlledTerminal implements Serializable{
 
   public void setLastHeartTime(Integer lastHeartTime) {
     this.lastHeartTime = lastHeartTime;
+  }
+
+  public String getAv() {
+    return av;
+  }
+
+  public void setAv(String av) {
+    this.av = av;
   }
 
   @Override

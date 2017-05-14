@@ -18,7 +18,14 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
-    url: jdbc:mysql://120.25.146.138:33060/db_langrensha
+    url: jdbc:mysql://120.25.146.138:33060/db_langrensha?useUnicode=true&characterEncoding=utf8
+  kafka:
+    bootstrap-servers: 120.25.146.138:9092
+    consumer.group-id: test
+    consumer.key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    consumer.value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer.key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    producer.value-serializer: org.apache.kafka.common.serialization.StringSerializer
 logging:
   level:
     root: INFO
