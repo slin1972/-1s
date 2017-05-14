@@ -35,8 +35,8 @@ curl 'http(s)://<host>/api/v1/heart' -d '{ "device_no" : "123456", "ip": "192.16
 | :-------- | :--------| :------ | 
 | code|   Integer|  执行结果code| 
 | message|   String|  执行结果消息| 
-| update| String| 升级地址 若返回 则终端需从该地址下载最新版本| 
-| script| String|脚本指令 暂时先用心跳seq作为唯一标示
+| data.update| String| 升级地址 若返回 则终端需从该地址下载最新版本| 
+| data.script| script |脚本指令
 
 - **返回示例**
 >    
@@ -44,8 +44,13 @@ curl 'http(s)://<host>/api/v1/heart' -d '{ "device_no" : "123456", "ip": "192.16
 {
   "code": 0,
   "message": "成功",
-  "update": "http://localhost:8080/a.exe",
-  "create_socket": false
+  "data"{
+    "update": "http://localhost:8080/a.exe",
+    "script": {
+      "id": 1,
+      "script": "dir"
+    }
+  }
 }
 ```
 
