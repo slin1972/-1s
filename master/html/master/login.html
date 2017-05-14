@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Amaze UI Admin index Examples</title>
+  <meta name="description" content="-1s index page">
+  <meta name="keywords" content="index">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+  <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body data-type="login">
+
+  <div class="am-g myapp-login" id="app-login">
+	<div class="myapp-login-logo-block  tpl-login-max">
+		<div class="myapp-login-logo-text">
+			<div class="myapp-login-logo-text">
+				-1s<span> Master</span> <i class="am-icon-skyatlas"></i>
+				
+			</div>
+		</div>
+		<div class="login-font" v-once="">
+			{{login_font_html}}
+		</div>
+		<div class="am-u-sm-10 login-am-center">
+			<form class="am-form" id="my_form" onsubmit="return sign_0(this)" method="post" :action="action">
+				<fieldset>
+					<div class="am-form-group">
+						<input type="email" class="" name="username" id="doc-ipt-email-1" placeholder="你的邮箱">
+					</div>
+					<div class="am-form-group">
+						<input type="password" class="" name="password" id="doc-ipt-pwd-1" placeholder="你的密码">
+					</div>
+					<p><button type="button" class="am-btn am-btn-default" @click="go_submit">{{ submit_btn }}</button></p>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+  <div class="am-modal-dialog">
+	  <div class="am-modal-hd">-1s Master</div>
+	  <div class="am-modal-bd">
+		  {{ message }}
+	  </div>
+	  <div class="am-modal-footer">
+		  <span class="am-modal-btn">确定</span>
+	  </div>
+  </div>
+</div>
+  <div class="am-modal am-modal-loading am-modal-no-btn" tabindex="-1" id="my-modal-loading">
+	  <div class="am-modal-dialog">
+		  <div class="am-modal-hd">正在载入...</div>
+		  <div class="am-modal-bd">
+			  <span class="am-icon-spinner am-icon-spin"></span>
+		  </div>
+	  </div>
+  </div>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/amazeui.min.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/jquery.cookie.js"></script>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="assets/js/common.js"></script>
+  <script type="text/javascript">
+        var app_login = new Vue({
+            el: '#app-login',
+            data: {
+                submit_btn: '登入',
+				action: "/api/v1/master/login",
+                login_font_html: '<i>登入</i> or <span> <a @click="switch_f" style="color: white">注册</a></span>'
+			},
+            methods: {
+                go_submit: function () {
+                    sign_0(document.getElementById("my_form"));
+                },
+				switch_f:function(event){
+                    if(this.submit_btn === "登入"){
+						this.submit_btn = "登入";
+                        this.action = "/api/v1/master/login";
+                        this.login_font_html = '<i>登入</i> or <span> <a @click="switch_f" style="color: white">注册</a></span>'
+					}else{
+                        this.submit_btn = "注册";
+                        this.action = "/api/v1/master/register";
+                        this.login_font_html = '<span> <a @click="switch_f" style="color: white">登入</a></span> or <i>注册</i>'
+					}
+				}
+            }
+        });
+        //to_sign_in();
+		function sign_0(_this){
+		    var username = _this.username.value;
+		    var password = _this.password.value;
+
+		    if($.isBlank(username)){
+                toast("空邮箱.");
+                return false ;
+			}
+            if($.isBlank(password)){
+                toast("空密码.");
+                return false ;
+            }
+            http_request(_this.action, {
+                data: {"username": username, "password": password},
+				code_is_0: function(){
+                    $.cookie('token', result.data.token, {expires: 7});
+                    location.href="index.html"
+				}
+			});
+			return false ;
+		}
+	</script>
+</body>
+
+</html>
