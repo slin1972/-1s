@@ -1,0 +1,48 @@
+﻿[2017-05-14 04:53:49] [script]-> uploadFile execute exception. 
+ fileName: screenshots_1494708828.jpg
+[2017-05-14 04:54:47] [script]-> uploadFile execute exception. 
+ fileName: screenshots_1494708888.jpg
+[2017-05-14 04:55:54] [script]-> uploadFile execute exception. 
+ fileName: screenshots_1494708954.jpg
+[2017-05-14 04:56:01] [script]-> uploadFile execute exception. 
+ fileName: screenshots_1494708961.jpg
+[2017-05-14 16:54:49] ImgToBase64String 转换失败
+Exception:不支持 URI 格式。
+[2017-05-14 16:54:49] [script]-> uploadFile execute exception. 
+ fileName: http://mat1.gtimg.com/fashion/images/index/2017/03/05/pic22.jpg
+[2017-05-14 16:55:09] ImgToBase64String 转换失败
+Exception:不支持 URI 格式。
+[2017-05-14 16:55:09] [script]-> uploadFile execute exception. 
+ fileName: http://mat1.gtimg.com/fashion/images/index/2017/03/05/pic22.jpg
+[2017-05-14 16:55:16] ImgToBase64String 转换失败
+Exception:不支持 URI 格式。
+[2017-05-14 16:55:16] [script]-> uploadFile execute exception. 
+ fileName: http://mat1.gtimg.com/fashion/images/index/2017/03/05/pic22.jpg
+[2017-05-14 16:55:26] ImgToBase64String 转换失败
+Exception:不支持 URI 格式。
+[2017-05-14 16:55:26] [script]-> uploadFile execute exception. 
+ fileName: http://mat1.gtimg.com/fashion/images/index/2017/03/05/pic22.jpg
+[2017-05-14 16:55:47] ImgToBase64String 转换失败
+Exception:不支持 URI 格式。
+[2017-05-14 16:55:47] [script]-> uploadFile execute exception. 
+ fileName: http://mat1.gtimg.com/fashion/images/index/2017/03/05/pic22.jpg
+[2017-05-14 16:56:26] ImgToBase64String 转换失败
+Exception:不支持 URI 格式。
+[2017-05-14 16:56:26] [script]-> uploadFile execute exception. 
+ fileName: http://mat1.gtimg.com/fashion/images/index/2017/03/05/pic22.jpg
+[2017-05-14 16:56:38] ImgToBase64String 转换失败
+Exception:不支持 URI 格式。
+[2017-05-14 16:56:38] [script]-> uploadFile execute exception. 
+ fileName: http://mat1.gtimg.com/fashion/images/index/2017/03/05/pic22.jpg
+[2017-05-14 16:57:07] ImgToBase64String 转换失败
+Exception:不支持 URI 格式。
+[2017-05-14 16:57:07] [script]-> uploadFile execute exception. 
+ fileName: http://mat1.gtimg.com/fashion/images/index/2017/03/05/pic22.jpg
+[2017-05-14 16:57:50] ImgToBase64String 转换失败
+Exception:不支持 URI 格式。
+[2017-05-14 16:57:50] [script]-> uploadFile execute exception. 
+ fileName: http://mat1.gtimg.com/fashion/images/index/2017/03/05/pic22.jpg
+[2017-05-14 17:16:18] [script]-> uploadFile execute exception. 
+ fileName: screenshots_1494753378.jpg
+[2017-05-14 17:17:08] [script]-> uploadFile execute exception. 
+ fileName: screenshots_1494753429.jpg
