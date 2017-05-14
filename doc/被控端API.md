@@ -104,13 +104,13 @@ curl 'http(s)://<host>/api/v1/upload' -d 'device_no=123456&n=xxx.jpg&v=asfdoasdf
 | 请求参数      |     参数类型 |   参数说明   | 
 | :-------- | :--------| :------ | 
 | device_no|   String,不可为空|  设备唯一标识，每个接口需一致| 
-| seq|   String,不可为空|  指令序列号| 
-| content|   String,不可为空|  返回内容| 
+| id|   String,不可为空|  指令序列号| 
+| result|   String,不可为空|  返回内容| 
 
 - **请求示例**
 >    
 ```shell 
-curl 'http(s)://<host>/api/v1/script_response' -d '{"device_no": "12345", "seq": "123", "content": "123123213213213"}'
+curl 'http(s)://<host>/api/v1/script_response' -d '{"device_no": "12345", "id": "123", "result": "123123213213213"}'
 ```
 
 - **返回参数**
