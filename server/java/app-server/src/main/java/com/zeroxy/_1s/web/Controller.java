@@ -66,7 +66,11 @@ public class Controller {
     return ResponseCode.OK_0;
   }
 
-  @PostMapping("/controlled/script")
+
+
+
+
+  @PostMapping("/api/v1/script")
   public CommonResult controlledScript(@RequestBody Script script) {
     scriptRepository.save(script);
     kafkaSender.sendScript(script, (script1)->{
@@ -76,15 +80,16 @@ public class Controller {
 
     return ResponseCode.OK_0;
   }
-  @GetMapping("/controlled/list")
-  public ModelAndView controlledList(@RequestParam String key) {
-    if(!key.equals("test321")){
-      return null ;
-    }
-    List<ControlledTerminal> list = controlledTerminalRepository.findAll();
-    ModelAndView modelAndView = new ModelAndView("list");
-    modelAndView.addObject("list", list);
-    return modelAndView;
 
+  @GetMapping("/api/v1/script_status")
+  public CommonResult scriptStatus(@RequestParam("script_id") Long scriptId) {
+    Script script = scriptRepository.findOne(scriptId);
+    return ResponseCode.newOkResult().setAttribute("script", script);
+  }
+
+  @GetMapping("/api/v1/controlled_list")
+  public CommonResult controlledList() {
+    List<ControlledTerminal> list = controlledTerminalRepository.findAll();
+    return ResponseCode.newOkResult().setAttribute("controlledList", list);
   }
 }
