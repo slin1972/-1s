@@ -10,7 +10,7 @@ git clone  --depth=1 https://github.com/slin1972/-1s.git  #克隆仓库到本地
 
 >  url: jdbc:mysql://120.25.146.138:33060/db_langrensha?useUnicode=true&characterEncoding=utf8 #line: 21   数据库地址 
 
->2. [C#被控端](https://github.com/slin1972/-1s/tree/master/controlled/c%23/controlled) 
+>2.[C#被控端](https://github.com/slin1972/-1s/tree/master/controlled/c%23/controlled) 
 
 > 直接从vs打开解决方案 
 
