@@ -6,7 +6,7 @@ namespace Controlled
 {
     class Global
     {
-        public static string ROOT_URL = "http://localhost:8089/api/v1";
+        public static string ROOT_URL = "https://1s.vernachen/api/v1";
         public static string deviceNo = "123456";
         public static string ip = "192.168.0.1";
         public static string cpu = "123456";

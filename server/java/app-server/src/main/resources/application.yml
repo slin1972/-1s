@@ -1,6 +1,8 @@
 server:
   port: 8089
 spring:
+  profiles:
+    active: dev
   application:
     name: app-server    # 项目名称尽量用小写
   jpa:
@@ -18,7 +20,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
-    url: jdbc:mysql://120.25.146.138:33060/db_langrensha?useUnicode=true&characterEncoding=utf8
+#   url: jdbc:mysql://120.25.146.138:33060/db_langrensha?useUnicode=true&characterEncoding=utf8
   kafka:
     bootstrap-servers: 120.25.146.138:9092
     consumer.group-id: test
@@ -41,3 +43,18 @@ eureka:
     preferIpAddress: true
 #hystrix.command.default.execution.timeout.enabled: false
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 5000
+
+
+---
+# 开发环境配置
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://120.25.146.138:33060/db_langrensha?useUnicode=true&characterEncoding=utf8
+
+---
+# 生产环境配置
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/db_langrensha?useUnicode=true&characterEncoding=utf8
