@@ -33,13 +33,32 @@
 				</el-table-column>
 				<el-table-column prop="last_heart_time" label="最后上线时间" min-width="180" :formatter="formatDateTime"  sortable>
 				</el-table-column>
+				<el-table-column label="操作" width="150">
+					<template scope="scope">
+						<el-button size="small" @click="showScriptForm(scope.$index, scope.row)">发送指令</el-button>
+					</template>
+				</el-table-column>
 			</el-table>
+
+
+			<!--发送指令-->
+			<el-dialog title="发送指令" v-model="scriptFormVisible" :close-on-click-modal="false">
+				<el-form :model="scriptForm" label-width="80px" :rules="scriptFormRules" ref="scriptForm">
+					<el-form-item label="指令">
+						<el-input type="textarea" v-model="scriptForm.script"></el-input>
+					</el-form-item>
+				</el-form>
+				<div slot="footer" class="dialog-footer">
+					<el-button @click.native="scriptFormVisible = false">取消</el-button>
+					<el-button type="primary" @click.native="scriptSubmit" :loading="scriptLoading">提交</el-button>
+				</div>
+			</el-dialog>
 		</template>
 
 	</section>
 </template>
 <script>
-	import { getControlledList } from '../../api/api';
+	import { getControlledList, addScript} from '../../api/api';
 	//import NProgress from 'nprogress'
 	export default {
 		data() {
@@ -49,13 +68,27 @@
 				},
 				loading: false,
 				controlleds: [
-				]
+				],
+                scriptFormVisible: false,
+                scriptLoading: false,
+                scriptFormRules: {
+                    script: [
+                        { required: true, message: '请输入指令', trigger: 'blur' }
+                    ]
+                },
+                scriptForm: {
+				    script: "",
+					device_no: ""
+				}
 			}
 		},
 		methods: {
-			//性别显示转换
             formatDateTime: function (row, column) {
-				return new Date(row.last_heart_time*1000).toLocaleString();
+                var date = row[column.property];
+                if (date === undefined) {
+                    return "";
+                }
+				return new Date(date*1000).toLocaleString();
 			},
 			//获取用户列表
             getControlleds: function () {
@@ -69,7 +102,35 @@
 					this.loading = false;
 					//NProgress.done();
 				});
-			}
+			},
+            //显示指令表单
+            showScriptForm: function (index, row) {
+                this.scriptFormVisible = true;
+                this.scriptForm.device_no = row.device_no;
+            },
+            //显示指令表单
+            scriptSubmit: function () {
+                this.$refs.scriptForm.validate((valid) => {
+                    if (valid) {
+                        this.$confirm('确认提交吗？', '提示', {}).then(() => {
+                            this.addLoading = true;
+                            //NProgress.start();
+                            let para = Object.assign({}, this.scriptForm);
+                            addScript(para).then((res) => {
+                                this.addLoading = false;
+                                //NProgress.done();
+                                this.$message({
+                                    message: '发送成功, 查看结果请跳转指令列表',
+                                    type: 'success'
+                                });
+                                this.$refs['scriptForm'].resetFields();
+                                this.scriptFormVisible = false;
+                                //this.getUsers();
+                            });
+                        });
+                    }
+                });
+            }
 		},
 		mounted() {
 			this.getControlleds();

@@ -6,6 +6,10 @@ export const requestLogin = params => { return axios.post(`${base}/api/v1/master
 
 export const getControlledList = params => { return axios.get(`${base}/api/v1/controlled_list`, { params: params }).then(res => res.data); };
 
+export const addScript = params => { return axios.post(`${base}/api/v1/script`, params).then(res => res.data); };
+
+export const getScriptList = params => { return axios.get(`${base}/api/v1/script_list`, { params: params }).then(res => res.data); };
+
 
 export const getUserList = params => { return axios.get(`${base}/user/list`, { params: params }).then(res => res.data); };
 

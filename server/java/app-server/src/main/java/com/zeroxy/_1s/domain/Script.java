@@ -21,8 +21,10 @@ public class Script extends IdDomain implements Serializable{
 
     private int status = 1 ;
 
+    @JsonProperty("send_time")
     private long sendTime = System.currentTimeMillis() ;
 
+    @JsonProperty("response_time")
     private Long responseTime ;
 
     public String getDeviceNo() {

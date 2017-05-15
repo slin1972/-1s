@@ -17,7 +17,7 @@ public class MasterUser extends IdDomain implements Serializable{
 
   private String token ;
 
-  private String avatar = "assets/img/user01.png";
+  private String avatar = "https://raw.githubusercontent.com/taylorchen709/markdown-images/master/vueadmin/user.png";
 
   private String nickname = "大牛";
 

@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface ScriptRepository extends JpaRepository<Script, Long> {
     List<Script> findByDeviceNoAndStatus(String deviceNo, int status);
+
+    List<Script> findByDeviceNo(String deviceNo);
 }

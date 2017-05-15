@@ -15,6 +15,7 @@ import com.zeroxy.util.Base64Util;
 import com.zeroxy.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Base64Utils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -98,6 +99,18 @@ public class Controller {
     return ResponseCode.ERROR_100;
   }
 
+
+  @GetMapping("/api/v1/script_list")
+  public CommonResult scriptList(@RequestParam("device_no") String device_no) {
+    List<Script> scripts = null ;
+    if(StringUtils.isEmpty(device_no)){
+      scripts = scriptRepository.findAll();
+    }else{
+      scripts = scriptRepository.findByDeviceNo(device_no);
+    }
+    return ResponseCode.newOkResult().setAttribute("scripts", scripts);
+  }
+
   @PostMapping("/api/v1/master/register")
   public CommonResult masterRegister(@RequestBody MasterUser masterUser) {
     String token = UUID.randomUUID().toString();
@@ -140,8 +153,13 @@ public class Controller {
   }
 
   @GetMapping("/api/v1/controlled_list")
-  public CommonResult controlledList() {
-    List<ControlledTerminal> list = controlledTerminalRepository.findAll();
-    return ResponseCode.newOkResult().setAttribute("controlleds", list);
+  public CommonResult controlledList(@RequestParam("device_no")String deviceNo) {
+    List<ControlledTerminal> cntrolledTerminals = null ;
+    if(StringUtils.isEmpty(deviceNo)){
+      cntrolledTerminals = controlledTerminalRepository.findAll();
+    }else{
+      cntrolledTerminals = controlledTerminalRepository.findByDeviceNo(deviceNo);
+    }
+    return ResponseCode.newOkResult().setAttribute("controlleds", cntrolledTerminals);
   }
 }

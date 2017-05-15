@@ -3,6 +3,7 @@ import NotFound from './views/404.vue'
 import Home from './views/Home.vue'
 import Main from './views/Main.vue'
 import Controlleds from './views/nav1/Controlleds.vue'
+import Scripts from './views/nav1/Scripts.vue'
 import Table from './views/nav1/Table.vue'
 import Form from './views/nav1/Form.vue'
 import user from './views/nav1/user.vue'
@@ -32,7 +33,7 @@ let routes = [
         iconCls: 'el-icon-message',//图标样式class
         children: [
             { path: '/controlleds', component: Controlleds, name: '终端列表'},
-            { path: '/controlleds', component: Controlleds, name: '指令列表'},
+            { path: '/Scripts', component: Scripts, name: '指令列表'},
             { path: '/controlleds', component: Controlleds, name: '文件列表'},
             { path: '/main', component: Main, name: '主页', hidden: true },
             { path: '/table', component: Table, name: 'Table' , hidden: true },
