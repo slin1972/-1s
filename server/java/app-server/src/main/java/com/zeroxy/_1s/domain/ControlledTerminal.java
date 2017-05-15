@@ -19,6 +19,7 @@ public class ControlledTerminal implements Serializable{
   private String ram ;
   private String os ;
   private String name ;
+  @JsonProperty("last_heart_time")
   private Integer lastHeartTime ;
   private String av;
 

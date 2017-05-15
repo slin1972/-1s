@@ -87,27 +87,31 @@ public class Controller {
   }
 
   @PostMapping("/api/v1/master/login")
-  public CommonResult masterLogin(@RequestParam String username, @RequestParam String password) {
+  public CommonResult masterLogin(@RequestBody MasterUser masterUser) {
     String token = UUID.randomUUID().toString();
-    password = CommonUtil.md5(username + password);
-    int count = masterUserRepository.updateTokenByUsernameAndPassword(token, username, password);
+    String password = CommonUtil.md5(masterUser.getUsername() + masterUser.getPassword());
+    int count = masterUserRepository.updateTokenByUsernameAndPassword(token, masterUser.getUsername(), password);
     if(count > 0){
-      return ResponseCode.newOkResult().setAttribute("token", token);
+      masterUser = masterUserRepository.findByUsername(masterUser.getUsername());
+      return ResponseCode.newOkResult().setAttribute("master_user", masterUser);
     }
     return ResponseCode.ERROR_100;
   }
 
   @PostMapping("/api/v1/master/register")
-  public CommonResult masterRegister(@RequestParam String username, @RequestParam String password) {
+  public CommonResult masterRegister(@RequestBody MasterUser masterUser) {
     String token = UUID.randomUUID().toString();
+    String username = masterUser.getUsername();
+    String password = masterUser.getPassword();
     password = CommonUtil.md5(username + password);
 
     int count = masterUserRepository.updateTokenByUsernameAndPassword(token, username, password);
     if(count > 0){
-      return ResponseCode.newOkResult().setAttribute("token", token);
+      masterUser = masterUserRepository.findByUsername(username);
+      return ResponseCode.newOkResult().setAttribute("master_user", masterUser);
     }
 
-    MasterUser masterUser = masterUserRepository.findByUsername(username);
+    masterUser = masterUserRepository.findByUsername(username);
     if(masterUser != null){
       return ResponseCode.ERROR_101;
     }
@@ -117,7 +121,7 @@ public class Controller {
     masterUser.setUsername(username);
     masterUser.setPassword(password);
     masterUserRepository.save(masterUser);
-    return ResponseCode.newOkResult().setAttribute("token", token);
+    return ResponseCode.newOkResult().setAttribute("master_user", masterUser);
   }
 
   @GetMapping("/api/v1/master/info")
@@ -138,6 +142,6 @@ public class Controller {
   @GetMapping("/api/v1/controlled_list")
   public CommonResult controlledList() {
     List<ControlledTerminal> list = controlledTerminalRepository.findAll();
-    return ResponseCode.newOkResult().setAttribute("controlled_list", list);
+    return ResponseCode.newOkResult().setAttribute("controlleds", list);
   }
 }
