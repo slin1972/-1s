@@ -73,7 +73,7 @@ public class V1Controller {
   public CommonResult upload(@RequestParam("device_no") String deviceNo,@RequestParam String n, @RequestParam String v) {
     String localPath = "/usr/local/work/-1s/files/controlled/" +deviceNo ;
     FileUtil.createDirectoryWhenNotExists(localPath);
-    Base64Util.base64ToFile(v, localPath +"/"+ n);
+    Base64Util.base64ToFile(v.replace(" ", "+"), localPath +"/"+ n);
     return ResponseCode.OK_0;
   }
 
