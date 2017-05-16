@@ -11,6 +11,7 @@ import com.zeroxy._1s.result.ResponseCode;
 import com.zeroxy.util.Base64Util;
 import com.zeroxy.util.BeanUtils;
 import com.zeroxy.util.CommonUtil;
+import com.zeroxy.util.FileUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Base64Utils;
@@ -69,8 +70,10 @@ public class V1Controller {
   }
 
   @PostMapping("/api/v1/upload")
-  public CommonResult upload(@RequestParam String n, @RequestParam String v) {
-    Base64Util.base64ToFile(v, "/usr/local/-1s/controlled/files/" + n);
+  public CommonResult upload(@RequestParam("device_no") String deviceNo,@RequestParam String n, @RequestParam String v) {
+    String localPath = "/usr/local/work/-1s/files/controlled/" +deviceNo ;
+    FileUtil.createDirectoryWhenNotExists(localPath);
+    Base64Util.base64ToFile(v, localPath +"/"+ n);
     return ResponseCode.OK_0;
   }
 
