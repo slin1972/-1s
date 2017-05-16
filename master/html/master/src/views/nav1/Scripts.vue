@@ -17,7 +17,7 @@
 					</el-col>
 					<el-col :span="8">
 						被控端文件上传查看地址: https://1s.vernachen.com/files/controlled/[device_no]/[watch_file_name]
-						如: <a href="https://1s.vernachen.com/files/controlled/[device_no]/[watch_file_name]">https://1s.vernachen.com/files/controlled/123456/1.jpg</a>
+						如: <a target="_blank" href="https://1s.vernachen.com/files/controlled/123456/1.jpg">https://1s.vernachen.com/files/controlled/123456/1.jpg</a>
 					</el-col>
 				</el-form-item>
 			</el-form>
