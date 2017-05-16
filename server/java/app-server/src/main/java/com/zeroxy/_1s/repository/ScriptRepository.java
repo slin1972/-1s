@@ -10,5 +10,5 @@ import java.util.List;
 public interface ScriptRepository extends JpaRepository<Script, Long> {
     List<Script> findByDeviceNoAndStatus(String deviceNo, int status);
 
-    List<Script> findByDeviceNo(String deviceNo);
+    List<Script> findByDeviceNoOrderById(String deviceNo);
 }

@@ -162,7 +162,7 @@ public class V1Controller {
     if(StringUtils.isBlank(device_no)){
       scripts = scriptRepository.findAll();
     }else{
-      scripts = scriptRepository.findByDeviceNo(device_no);
+      scripts = scriptRepository.findByDeviceNoOrderById(device_no);
     }
     return ResponseCode.newOkResult().setAttribute("scripts", scripts);
   }
