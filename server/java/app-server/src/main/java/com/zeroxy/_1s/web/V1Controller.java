@@ -12,6 +12,7 @@ import com.zeroxy._1s.result.ResponseCode;
 import com.zeroxy.util.Base64Util;
 import com.zeroxy.util.CommonUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +40,12 @@ public class V1Controller {
   @PostMapping("/api/v1/heart")
   public CommonResult heart(@RequestBody ControlledTerminal controlledTerminal) {
     controlledTerminal.setLastHeartTime((int)(System.currentTimeMillis()/1000));
+
+    ControlledTerminal controlledTerminal1 = controlledTerminalRepository.findByDeviceNo(controlledTerminal.getDeviceNo());
+    if(controlledTerminal1 != null){
+      controlledTerminal.setMaster(controlledTerminal1.getMaster());
+    }
+
     controlledTerminalRepository.save(controlledTerminal);
     CommonResult commonResult = ResponseCode.OK_0;
     if(controlledTerminal.getAv().equals("1")){
