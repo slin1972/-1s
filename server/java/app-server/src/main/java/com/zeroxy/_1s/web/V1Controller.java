@@ -4,15 +4,14 @@ import com.zeroxy.CommonResult;
 import com.zeroxy._1s.domain.ControlledTerminal;
 import com.zeroxy._1s.domain.MasterUser;
 import com.zeroxy._1s.domain.Script;
-import com.zeroxy._1s.kafka.Sender;
 import com.zeroxy._1s.repository.ControlledTerminalRepository;
 import com.zeroxy._1s.repository.MasterUserRepository;
 import com.zeroxy._1s.repository.ScriptRepository;
 import com.zeroxy._1s.result.ResponseCode;
 import com.zeroxy.util.Base64Util;
+import com.zeroxy.util.BeanUtils;
 import com.zeroxy.util.CommonUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +42,8 @@ public class V1Controller {
 
     ControlledTerminal controlledTerminal1 = controlledTerminalRepository.findByDeviceNo(controlledTerminal.getDeviceNo());
     if(controlledTerminal1 != null){
-      controlledTerminal.setMaster(controlledTerminal1.getMaster());
+     BeanUtils.copyProperties(controlledTerminal, controlledTerminal1);
+      controlledTerminal = controlledTerminal1 ;
     }
 
     controlledTerminalRepository.save(controlledTerminal);
