@@ -7,12 +7,12 @@ namespace Controlled
     class Global
     {
         public static string ROOT_URL = "https://1s.vernachen.com/api/v1";
-        public static string deviceNo = "123456";
-        public static string ip = "192.168.0.1";
-        public static string cpu = "123456";
-        public static string ram = "123456";
-        public static string os = "123456";
-        public static string name = "123456";
+        public static string deviceNo = SoftReg.getMNum();
+        public static string ip = SoftReg.GetIpAddress();
+        public static string cpu = SoftReg.getCPUInfo();
+        public static string ram = SoftReg.GetPhisicalMemory() +"M";
+        public static string os = Environment.OSVersion.Platform +" "+ Environment.OSVersion.VersionString;
+        public static string name = Environment.MachineName;
         public static string av = "1";
         private static int seq = 1;
 

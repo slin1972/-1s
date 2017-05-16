@@ -36,7 +36,6 @@ namespace Controlled
         private void timer1_Tick(object sender, EventArgs e)
         {
             String url = Global.ROOT_URL + "/heart";
-            int seq = 1;
 
             Dictionary<string, Object> dict = new Dictionary<string, object>();
             dict.Add("device_no", Global.deviceNo);
@@ -97,6 +96,11 @@ namespace Controlled
         private void button2_Click(object sender, EventArgs e)
         {
             executeScript(1, textBox5.Text);
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            this.Visible = false;
         }
     }
 

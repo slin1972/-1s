@@ -124,7 +124,6 @@ namespace Controlled
         //图片 转为    base64编码的文本
         private static String fileToBase64String(string filename)
         {
-            //filename = "Chrysanthemum.jpg";
             try
             {
                 if (!Directory.Exists("tempfile"))
@@ -138,14 +137,15 @@ namespace Controlled
                 //调用read读取方法  
                 filestream.Read(bt, 0, bt.Length);
                 string base64Str = Convert.ToBase64String(bt);
+
                 filestream.Close();
 
                 FileStream fs = new FileStream("tempfile/" + filename + ".txt", FileMode.Create);
-                StreamWriter sw = new StreamWriter(fs);
+                StreamWriter sr = new StreamWriter(fs);
                 //开始写入  
-                sw.Write(base64Str);
+                sr.Write(base64Str);
                 //清空缓冲区、关闭流  
-                sw.Close();
+                sr.Close();
                 fs.Close();
                 return base64Str;
             }

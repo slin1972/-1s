@@ -1,0 +1,9 @@
+J:\-1s\controlled\c#\controlled\Controlled\bin\Release\Controlled.exe.config
+J:\-1s\controlled\c#\controlled\Controlled\bin\Release\Controlled.exe
+J:\-1s\controlled\c#\controlled\Controlled\bin\Release\Controlled.pdb
+J:\-1s\controlled\c#\controlled\Controlled\obj\Release\Controlled.csprojResolveAssemblyReference.cache
+J:\-1s\controlled\c#\controlled\Controlled\obj\Release\Controlled.Form1.resources
+J:\-1s\controlled\c#\controlled\Controlled\obj\Release\Controlled.Properties.Resources.resources
+J:\-1s\controlled\c#\controlled\Controlled\obj\Release\Controlled.csproj.GenerateResource.Cache
+J:\-1s\controlled\c#\controlled\Controlled\obj\Release\Controlled.exe
+J:\-1s\controlled\c#\controlled\Controlled\obj\Release\Controlled.pdb
