@@ -18,6 +18,13 @@ Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(Vuex)
 
+Vue.filter('unixtime_to_date', function (unixtime) {
+    if (unixtime === undefined || unixtime === null || unixtime === "") {
+        return "";
+    }
+    return new Date(unixtime).toLocaleString();
+});
+
 //NProgress.configure({ showSpinner: false });
 
 const router = new VueRouter({

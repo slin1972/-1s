@@ -27,8 +27,8 @@ import java.util.UUID;
  */
 @RestController
 public class V1Controller {
-  @Autowired
-  private Sender kafkaSender;
+  //@Autowired
+  //private Sender kafkaSender;
   @Autowired
   private ControlledTerminalRepository controlledTerminalRepository;
   @Autowired
@@ -57,7 +57,7 @@ public class V1Controller {
     script.setResponseTime(System.currentTimeMillis());
     script.setStatus(0);
     scriptRepository.save(script);
-    kafkaSender.sendScriptResponse(script);
+    //kafkaSender.sendScriptResponse(script);
     return ResponseCode.OK_0;
   }
 
@@ -133,10 +133,10 @@ public class V1Controller {
       return ResponseCode.ERROR_300;
     }
     scriptRepository.save(script);
-    kafkaSender.sendScript(script, (script1)->{
-      Script script2 = (Script) script1;
-      scriptRepository.save(script2);
-    });
+//    kafkaSender.sendScript(script, (script1)->{
+//      Script script2 = (Script) script1;
+//      scriptRepository.save(script2);
+//    });
 
     return ResponseCode.OK_0;
   }
