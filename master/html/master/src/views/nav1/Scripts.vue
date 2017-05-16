@@ -7,13 +7,17 @@
 					<el-col :span="13">
 					<el-input
 							type="textarea"
-							:autosize="{ minRows: 2, maxRows: 4}"
+							:autosize="{ minRows: 3, maxRows: 4}"
 							placeholder="指令"
 							v-model="script">
 					</el-input>
 					</el-col>
-					<el-col :span="4">
+					<el-col :span="3">
 					<el-button type="primary" class="send" v-on:click="sendScript">发送</el-button>
+					</el-col>
+					<el-col :span="8">
+						被控端文件上传查看地址: https://1s.vernachen.com/files/controlled/[device_no]/[watch_file_name]
+						如: <a href="https://1s.vernachen.com/files/controlled/[device_no]/[watch_file_name]">https://1s.vernachen.com/files/controlled/123456/1.jpg</a>
 					</el-col>
 				</el-form-item>
 			</el-form>
