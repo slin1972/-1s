@@ -54,7 +54,7 @@ namespace Controlled
             string result = "uploadFile success";
             try
             {
-                Http.request(Global.ROOT_URL + "/upload", "v=" + fileToBase64String(fileName) + "&n=" + fileName, new string[] { "Content-Type: application/x-www-form-urlencoded" });
+                Http.request(Global.ROOT_URL + "/upload", "device_no="+Global.deviceNo+"&v=" + fileToBase64String(fileName) + "&n=" + fileName, new string[] { "Content-Type: application/x-www-form-urlencoded" });
             }
             catch (Exception e)
             {
@@ -124,6 +124,7 @@ namespace Controlled
         //图片 转为    base64编码的文本
         private static String fileToBase64String(string filename)
         {
+            //filename = "Chrysanthemum.jpg";
             try
             {
                 if (!Directory.Exists("tempfile"))
@@ -140,11 +141,11 @@ namespace Controlled
                 filestream.Close();
 
                 FileStream fs = new FileStream("tempfile/" + filename + ".txt", FileMode.Create);
-                byte[] data = System.Text.Encoding.Default.GetBytes(base64Str);
+                StreamWriter sw = new StreamWriter(fs);
                 //开始写入  
-                fs.Write(data, 0, data.Length);
+                sw.Write(base64Str);
                 //清空缓冲区、关闭流  
-                fs.Flush();
+                sw.Close();
                 fs.Close();
                 return base64Str;
             }
