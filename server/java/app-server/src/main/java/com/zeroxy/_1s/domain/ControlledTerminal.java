@@ -23,6 +23,16 @@ public class ControlledTerminal implements Serializable{
   private Integer lastHeartTime ;
   private String av;
 
+  private String master;
+
+  public String getMaster() {
+    return master;
+  }
+
+  public void setMaster(String master) {
+    this.master = master;
+  }
+
   public static long getSerialVersionUID() {
     return serialVersionUID;
   }

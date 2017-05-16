@@ -7,7 +7,7 @@
 					<el-input v-model="filters.device_no" placeholder="设备号"></el-input>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary"  v-on:click="getControlleds">查询</el-button>
+					<el-button type="primary" v-on:click="getControlleds">查询</el-button>
 				</el-form-item>
 			</el-form>
 		</el-col>

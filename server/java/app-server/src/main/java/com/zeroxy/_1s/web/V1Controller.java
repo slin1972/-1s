@@ -4,8 +4,6 @@ import com.zeroxy.CommonResult;
 import com.zeroxy._1s.domain.ControlledTerminal;
 import com.zeroxy._1s.domain.MasterUser;
 import com.zeroxy._1s.domain.Script;
-import com.zeroxy._1s.kafka.Callback;
-import com.zeroxy._1s.kafka.Receiver;
 import com.zeroxy._1s.kafka.Sender;
 import com.zeroxy._1s.repository.ControlledTerminalRepository;
 import com.zeroxy._1s.repository.MasterUserRepository;
@@ -13,15 +11,12 @@ import com.zeroxy._1s.repository.ScriptRepository;
 import com.zeroxy._1s.result.ResponseCode;
 import com.zeroxy.util.Base64Util;
 import com.zeroxy.util.CommonUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Base64Utils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -31,7 +26,7 @@ import java.util.UUID;
  * @author slin
  */
 @RestController
-public class Controller {
+public class V1Controller {
   @Autowired
   private Sender kafkaSender;
   @Autowired
@@ -68,22 +63,7 @@ public class Controller {
 
   @PostMapping("/api/v1/upload")
   public CommonResult upload(@RequestParam String n, @RequestParam String v) {
-    Base64Util.base64ToFile(v, n);
-    return ResponseCode.OK_0;
-  }
-
-
-
-
-
-  @PostMapping("/api/v1/script")
-  public CommonResult controlledScript(@RequestBody Script script) {
-    scriptRepository.save(script);
-    kafkaSender.sendScript(script, (script1)->{
-      Script script2 = (Script) script1;
-      scriptRepository.save(script2);
-    });
-
+    Base64Util.base64ToFile(v, "/usr/local/-1s/controlled/files/" + n);
     return ResponseCode.OK_0;
   }
 
@@ -98,19 +78,6 @@ public class Controller {
     }
     return ResponseCode.ERROR_100;
   }
-
-
-  @GetMapping("/api/v1/script_list")
-  public CommonResult scriptList(@RequestParam("device_no") String device_no) {
-    List<Script> scripts = null ;
-    if(StringUtils.isEmpty(device_no)){
-      scripts = scriptRepository.findAll();
-    }else{
-      scripts = scriptRepository.findByDeviceNo(device_no);
-    }
-    return ResponseCode.newOkResult().setAttribute("scripts", scripts);
-  }
-
   @PostMapping("/api/v1/master/register")
   public CommonResult masterRegister(@RequestBody MasterUser masterUser) {
     String token = UUID.randomUUID().toString();
@@ -137,29 +104,80 @@ public class Controller {
     return ResponseCode.newOkResult().setAttribute("master_user", masterUser);
   }
 
-  @GetMapping("/api/v1/master/info")
-  public CommonResult masterInfo(@RequestParam("token") String token) {
-    MasterUser masterUser = masterUserRepository.findByToken(token);
+  @GetMapping("/api/v1/script_status")
+  public CommonResult scriptStatus(@RequestParam("script_id") Long scriptId,@RequestHeader String token) {
+    MasterUser masterUser = validateToken(token);
     if(masterUser == null){
       return ResponseCode.ERROR_300;
     }
-    return ResponseCode.newOkResult().setAttribute("master_user", masterUser);
-  }
-
-  @GetMapping("/api/v1/script_status")
-  public CommonResult scriptStatus(@RequestParam("script_id") Long scriptId) {
     Script script = scriptRepository.findOne(scriptId);
     return ResponseCode.newOkResult().setAttribute("script", script);
   }
 
-  @GetMapping("/api/v1/controlled_list")
-  public CommonResult controlledList(@RequestParam("device_no")String deviceNo) {
-    List<ControlledTerminal> cntrolledTerminals = null ;
-    if(StringUtils.isEmpty(deviceNo)){
-      cntrolledTerminals = controlledTerminalRepository.findAll();
+  @GetMapping("/api/v1/downloadControlled")
+  public CommonResult downloadControlled(@RequestHeader(required = false) String token) {
+    MasterUser masterUser = validateToken(token);
+    String master = "default";
+    if(masterUser != null){
+      master = CommonUtil.md5(masterUser.getUsername() + masterUser.getId());
+    }
+    //判断文件是否存在
+
+    return ResponseCode.newOkResult().setAttribute("url", "/files/controlled/client/"+master+".exe");
+  }
+
+  @PostMapping("/api/v1/script")
+  public CommonResult controlledScript(@RequestBody Script script,@RequestHeader String token) {
+    MasterUser masterUser = validateToken(token);
+    if(masterUser == null){
+      return ResponseCode.ERROR_300;
+    }
+    scriptRepository.save(script);
+    kafkaSender.sendScript(script, (script1)->{
+      Script script2 = (Script) script1;
+      scriptRepository.save(script2);
+    });
+
+    return ResponseCode.OK_0;
+  }
+
+
+  @GetMapping("/api/v1/script_list")
+  public CommonResult scriptList(@RequestParam("device_no") String device_no,@RequestHeader String token) {
+    MasterUser masterUser = validateToken(token);
+    if(masterUser == null){
+      return ResponseCode.ERROR_300;
+    }
+    List<Script> scripts = null ;
+    if(StringUtils.isBlank(device_no)){
+      scripts = scriptRepository.findAll();
     }else{
-      cntrolledTerminals = controlledTerminalRepository.findByDeviceNo(deviceNo);
+      scripts = scriptRepository.findByDeviceNo(device_no);
+    }
+    return ResponseCode.newOkResult().setAttribute("scripts", scripts);
+  }
+
+  @GetMapping("/api/v1/controlled_list")
+  public CommonResult controlledList(@RequestParam("device_no")String deviceNo,@RequestHeader String token) {
+    MasterUser masterUser = validateToken(token);
+    if(masterUser == null){
+      return ResponseCode.ERROR_300;
+    }
+    String master = CommonUtil.md5(masterUser.getUsername() + masterUser.getId());
+    List<ControlledTerminal> cntrolledTerminals = null ;
+    if(StringUtils.isBlank(deviceNo)){
+      cntrolledTerminals = controlledTerminalRepository.findByMaster(master);
+    }else{
+      cntrolledTerminals = controlledTerminalRepository.findByDeviceNoAndMaster(deviceNo, master);
     }
     return ResponseCode.newOkResult().setAttribute("controlleds", cntrolledTerminals);
+  }
+
+  private MasterUser validateToken(String token) {
+    MasterUser masterUser = null ;
+    if(StringUtils.isNotBlank(token)){
+      masterUser = masterUserRepository.findByToken(token);
+    }
+    return masterUser ;
   }
 }

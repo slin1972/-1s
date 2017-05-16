@@ -10,6 +10,9 @@
 				</div>
 			</el-col>
 			<el-col :span="4" class="userinfo">
+				<div class="myclient" @click.prevent="downloadMyControlled">
+					下载我的被控
+				</div>
 				<el-dropdown trigger="hover">
 					<span class="el-dropdown-link userinfo-inner"><img :src="this.sysUserAvatar" /> {{sysUserName}}</span>
 					<el-dropdown-menu slot="dropdown">
@@ -72,6 +75,7 @@
 </template>
 
 <script>
+    import { downloadControlled} from '../api/api';
 	export default {
 		data() {
 			return {
@@ -103,6 +107,14 @@
 			},
 			handleselect: function (a, b) {
 			},
+            downloadMyControlled: function(){
+                downloadControlled().then(result => {
+                    let { msg, code, data } = result;
+                    if (code === 0) {
+                        location.href=data.url;
+                    }
+                });
+			},
 			//退出登录
 			logout: function () {
 				var _this = this;
@@ -114,8 +126,6 @@
 				}).catch(() => {
 
 				});
-
-
 			},
 			//折叠导航栏
 			collapse:function(){
@@ -151,6 +161,12 @@
 			line-height: 60px;
 			background: $color-primary;
 			color:#fff;
+			.myclient{
+				text-align:right;
+				padding-right: 35px;
+				float: left;
+				cursor: pointer;
+			}
 			.userinfo {
 				text-align: right;
 				padding-right: 35px;

@@ -1,42 +1,43 @@
 <template>
 	<section>
-		<!--工具条-->
-		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-			<el-form :inline="true" :model="filters">
-				<el-form-item>
-					<el-input v-model="filters.device_no" placeholder="设备号"></el-input>
-				</el-form-item>
-				<el-form-item>
-					<el-button type="primary" v-on:click="getScripts">查询</el-button>
-				</el-form-item>
-			</el-form>
-		</el-col>
-
-		<!--列表-->
-		<template>
-			<el-table :data="scripts" highlight-current-row v-loading="loading" style="width: 100%;">
-				<el-table-column type="index" width="60">
-				</el-table-column>
-				<el-table-column prop="device_no" label="设备号" width="100">
-				</el-table-column>
-				<el-table-column prop="script" label="脚本">
-				</el-table-column>
-				<el-table-column prop="send_time" label="发送时间" width="180" :formatter="dateFormat">
-				</el-table-column>
-				<el-table-column prop="result" label="结果">
-				</el-table-column>
-				<el-table-column prop="response_time" label="接收时间" width="180" :formatter="dateFormat">
-				</el-table-column>
-			</el-table>
-		</template>
+		<el-row>
+			<el-col :span="3">
+				<el-table :data="scripts" highlight-current-row v-loading="loading" style="width: 100%;">
+					<el-table-column  :cell-click="changeDeviceNo" label="ALL">
+						<template scope="scope">
+							111123123
+						</template>
+					</el-table-column>
+				</el-table>
+			</el-col>
+			<el-col :span="21">
+				<!--列表-->
+					<el-table :data="scripts" highlight-current-row v-loading="loading" style="width: 100%;">
+						<el-table-column type="index" width="60">
+						</el-table-column>
+						<el-table-column prop="device_no" label="设备号" width="100">
+						</el-table-column>
+						<el-table-column prop="script" label="脚本">
+						</el-table-column>
+						<el-table-column prop="send_time" label="发送时间" width="180" :formatter="dateFormat">
+						</el-table-column>
+						<el-table-column prop="result" label="结果">
+						</el-table-column>
+						<el-table-column prop="response_time" label="接收时间" width="180" :formatter="dateFormat">
+						</el-table-column>
+					</el-table>
+			</el-col>
+		</el-row>
 
 	</section>
 </template>
 <script>
 	import { getScriptList} from '../../api/api';
+    import ElCol from "element-ui/packages/col/src/col";
 	//import NProgress from 'nprogress'
 	export default {
-		data() {
+        components: {ElCol},
+        data() {
 			return {
                 filters: {
                     device_no: ''
@@ -53,6 +54,9 @@
                     return "";
                 }
                 return new Date(date).toLocaleString();
+            },
+            changeDeviceNo: function (row, column, cell, event) {
+                alert('1111');
             },
 			//获取用户列表
             getScripts: function () {

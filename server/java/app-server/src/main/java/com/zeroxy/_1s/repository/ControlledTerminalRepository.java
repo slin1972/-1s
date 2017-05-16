@@ -13,4 +13,8 @@ import java.util.List;
 public interface ControlledTerminalRepository extends JpaRepository<ControlledTerminal, Long> {
 
     List<ControlledTerminal> findByDeviceNo(String deviceNo);
+
+    List<ControlledTerminal> findByDeviceNoAndMaster(String deviceNo, String master);
+
+    List<ControlledTerminal> findByMaster(String master);
 }
