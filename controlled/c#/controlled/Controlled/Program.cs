@@ -78,7 +78,7 @@ namespace Controlled
                 }
             }
 
-            iniFile.IniWriteValue("config", "register", "0");
+            iniFile.IniWriteValue("config", "register", "1");
             String s = iniFile.IniReadValue("config", "register");
 
             string exeName = "1scontrolled";
