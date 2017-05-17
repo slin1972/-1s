@@ -48,7 +48,8 @@ namespace Controlled
             dict.Add("seq", Global.getSeq());
 
             String body = dict.ToJson();
-            string response = Http.request(url, body);
+            string response = null ;
+            response = Http.request(url, body);
             textBox3.Text = response;
             CommonResult result = response.FromJson<CommonResult>();
 

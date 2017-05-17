@@ -67,6 +67,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Http.cs" />
+    <Compile Include="IniFile.cs" />
     <Compile Include="JSONParser.cs" />
     <Compile Include="JSONWriter.cs" />
     <Compile Include="LogHelper.cs" />

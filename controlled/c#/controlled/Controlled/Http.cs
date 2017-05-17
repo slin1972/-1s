@@ -53,7 +53,8 @@ namespace Controlled
             }
             catch (Exception ex)
             {
-                throw ex;
+                LogHelper.error(ex.Message);
+                return "{code: 998, msg: \"CAN'T ACCESS SERVER.\"}";
             }
             return retString;
         }
