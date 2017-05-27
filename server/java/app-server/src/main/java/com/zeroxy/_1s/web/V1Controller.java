@@ -153,7 +153,7 @@ public class V1Controller {
 
 
   @GetMapping("/api/v1/script_list")
-  public CommonResult scriptList(@RequestParam("device_no") String device_no,@RequestHeader String token) {
+  public CommonResult scriptList(@RequestParam("device_no") String device_no,@RequestParam String token) {
     MasterUser masterUser = validateToken(token);
     if(masterUser == null){
       return ResponseCode.ERROR_300;
